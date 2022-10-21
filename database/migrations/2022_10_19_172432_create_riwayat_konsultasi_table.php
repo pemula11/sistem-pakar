@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('riwayat_konsultasi', function (Blueprint $table) {
             $table->id();
-            $table->s();
+            $table->integer("id_gejala");
+            $table->integer("id_kerusakan");
+            $table->integer("id_solusi");
             $table->timestamps();
         });
     }

@@ -12,7 +12,7 @@
           </li>
       </ul>
       <a class="navbar-brand m-auto" href="/">
-          <span class="brand-txt">ANDRI CENTER</span>
+          <span class="brand-txt">BEJI CENTER</span>
       </a>
       <ul class="navbar-nav">
           <li class="nav-item">

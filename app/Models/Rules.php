@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class gejala_tables extends Model
+class Rules extends Model
 {
     use HasFactory;
 }

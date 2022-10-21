@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Andri | {{ $tittle }}</title>
+    <title>BEJI CENTER | {{ $tittle }}</title>
     
     <!-- Style CSS -->
     <link rel="stylesheet" href="/css/style.css">
@@ -54,7 +54,7 @@
             </div>
             <div class="col-sm-4">
                 <h3>FIND US</h3>
-                <P class="text-muted">Andri Home</P>
+                <P class="text-muted">BEJI CENTER</P>
             </div>
         </div>
       </div>

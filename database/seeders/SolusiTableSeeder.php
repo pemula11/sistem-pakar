@@ -37,5 +37,6 @@ class SolusiTableSeeder extends Seeder
             ]);
 
         }
+        
     }
 }
