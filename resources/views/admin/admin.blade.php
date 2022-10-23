@@ -12,7 +12,7 @@
                 </li>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="/" class="btn btn-primary ml-xl-4">Logout</a>
+                    <a href="/logout" class="btn btn-primary ml-xl-4">Logout</a>
                 </li>
             </ul>
         </div>

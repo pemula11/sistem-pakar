@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             GejalaTableSeeder::class,
             KerusakanTableSeeder::class,
             SolusiTableSeeder::class,
+            user_rolesTableSeeder::class,
         ]);
     }
 }

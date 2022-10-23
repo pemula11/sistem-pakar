@@ -36,7 +36,9 @@ Route::get('/about', function () {
     ]);
 });
 
-Route::get('/login', [LoginController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'auth']);
+Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 Route::get('/register', [RegisterController::class, 'index']);
 
@@ -52,7 +54,7 @@ Route::get('/admin', function () {
         "tittle" => "Dashboard",
         "active" => "dashboard"
     ]);
-});
+})->middleware('auth');
 
 Route::get('/datauser', function () {
     return view('admin.datauser', [
@@ -81,3 +83,5 @@ Route::get('/riwayat', function () {
         "active" => "riwayat"
     ]);
 });
+
+
