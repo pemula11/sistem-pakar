@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GejalaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -49,8 +50,10 @@ Route::get('/user', function () {
     ]);
 });
 
-Route::get('/admin', function () {
-    return view('admin.admin', [
+Route::get('/dashboard/gejala', [GejalaController::class, 'index']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard.index', [
         "tittle" => "Dashboard",
         "active" => "dashboard"
     ]);
