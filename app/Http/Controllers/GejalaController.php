@@ -14,9 +14,11 @@ class GejalaController extends Controller
      */
     public function index()
     {
+        $data = gejala::all();
         return view('dashboard.gejala.index', [
             'tittle' => 'Login',
-            'active' => 'login'
+            'active' => 'login',
+            'gejalaTable' => $data,
         ]);
     }
 

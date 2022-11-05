@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.main')
-
+@section('title', 'gejala')
 @section('content')
     
 

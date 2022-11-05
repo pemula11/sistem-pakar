@@ -42,19 +42,31 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/dashboard/kerusakan" class="nav-link">
                   <i class="fas fa-circle nav-icon"></i>
-                  <p> Menu Solusi </p>
+                  <p> Menu Kerusakan </p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/dashboard/solusi" class="nav-link">
                   <i class="fas fa-circle nav-icon"></i>
-                  <p>Menu Kerusakan</p>
+                  <p>Menu solusi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/dashboard/rule" class="nav-link">
+                  <i class="fas fa-circle nav-icon"></i>
+                  <p>Menu Rule</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/dashboard/users" class="nav-link">
+                  <i class="fas fa-circle nav-icon"></i>
+                  <p>Data User</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/dashboard/riwayat" class="nav-link">
                   <i class="fas fa-circle nav-icon"></i>
                   <p>Riwayat </p>
                 </a>

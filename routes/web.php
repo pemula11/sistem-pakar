@@ -4,6 +4,7 @@ use App\Http\Controllers\GejalaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SolusiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,14 +51,16 @@ Route::get('/user', function () {
     ]);
 });
 
-Route::get('/dashboard/gejala', [GejalaController::class, 'index']);
-
 Route::get('/dashboard', function () {
     return view('dashboard.index', [
         "tittle" => "Dashboard",
         "active" => "dashboard"
     ]);
 })->middleware('auth');
+
+Route::resource('/dashboard/gejala', GejalaController::class);
+Route::resource('/dashboard/solusi', SolusiController::class);
+
 
 Route::get('/datauser', function () {
     return view('admin.datauser', [
@@ -66,19 +69,7 @@ Route::get('/datauser', function () {
     ]);
 });
 
-Route::get('/gejala', function () {
-    return view('admin.gejala', [
-        "tittle" => "Gejala",
-        "active" => "gejala"
-    ]);
-});
 
-Route::get('/solusi', function () {
-    return view('admin.solusi', [
-        "tittle" => "Solusi",
-        "active" => "solusi"
-    ]);
-});
 
 Route::get('/riwayat', function () {
     return view('admin.riwayat', [
