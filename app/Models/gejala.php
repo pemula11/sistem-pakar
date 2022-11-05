@@ -9,4 +9,5 @@ class gejala extends Model
 {
     use HasFactory;
     protected $table = 'gejala';
+    
 }
