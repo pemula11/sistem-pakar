@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('kerusakan', function (Blueprint $table) {
             $table->id();
+            $table->string("kode_kerusakan", 10)->required();
             $table->string("nama_kerusakan", 50)->required();
             $table->text("deskripsi_kerusakan", 250);
 

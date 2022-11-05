@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class GejalaController extends Controller
 {
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -30,6 +32,7 @@ class GejalaController extends Controller
     public function create()
     {
         //
+       
     }
 
     /**
@@ -40,7 +43,15 @@ class GejalaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $validatedData = $request->validate([
+            'kode_gejala' => 'required|max:50|unique:gejala',
+            'nama_gejala' => 'max:50|required',
+            'deskripsi_gejala' => 'max:250|required',
+           ]);
+           gejala::create($validatedData);
+           
+          return redirect('/dashboard/gejala')->with('success', 'New Category Has Been Added');
     }
 
     /**
@@ -60,9 +71,21 @@ class GejalaController extends Controller
      * @param  \App\Models\gejala  $gejala
      * @return \Illuminate\Http\Response
      */
-    public function edit(gejala $gejala)
+    public function edit($kode_gejala)
     {
         //
+       
+        $kode = gejala::select()->where('kode_gejala', $kode_gejala)->get();
+        
+        if ($kode->count() > 0) {
+            return view('dashboard.gejala.edit_gejala', [
+                'data_gejala' => $kode[0],
+            ]);
+        }
+        else{
+            return redirect('/dashboard/gejala')->with('error', 'error enconunter');
+        }
+        
     }
 
     /**
@@ -74,7 +97,20 @@ class GejalaController extends Controller
      */
     public function update(Request $request, gejala $gejala)
     {
-        //
+        //'kode_gejala' => 'required|max:50|unique:gejala',
+        $rules = [
+            
+            'nama_gejala' => 'max:50|required',
+            'deskripsi_gejala' => 'max:250|required',
+           ];
+        if ($request->kode_gejala != $gejala->kode_gejala) {
+            # code...
+            $rules['kode_gejala'] = 'required|max:50|unique:gejala';
+        }
+        $validatedData = $request->validate($rules);
+        gejala::where('id', $gejala->id)
+            ->update($validatedData);
+        return redirect('/dashboard/gejala')->with('success', 'Gejala Has Been Updated');
     }
 
     /**
@@ -85,6 +121,8 @@ class GejalaController extends Controller
      */
     public function destroy(gejala $gejala)
     {
-        //
+        gejala::destroy($gejala->id);
+
+        return redirect('/dashboard/gejala')->with('success', ' Post Has Been Deleted');
     }
 }

@@ -19,19 +19,20 @@ class SolusiTableSeeder extends Seeder
         //
         solusi::truncate();
         $data = [
-            ['nama_solusi' => 'ganti layar', 'deskripsi_solusi'=> 'layar komputer tidak menyala'],
-            ['nama_solusi' => 'bersihkan keyboard', 'deskripsi_solusi'=> 'keyboard ketik tidak semestinya '],
-            ['nama_solusi' => 'tambah penyimpaan hardisk', 'deskripsi_solusi'=> 'booting lama sekali'],
-            ['nama_solusi' => 'ganti colling system', 'deskripsi_solusi'=> 'kipas mengeluarkan suara keras'],
-            ['nama_solusi' => 'cek kualitas baterai', 'deskripsi_solusi'=> 'daya tidak bisa terisi'],
+            ['kode_solusi' => 'S001', 'nama_solusi' => 'ganti layar', 'deskripsi_solusi'=> 'layar komputer tidak menyala'],
+            ['kode_solusi' => 'S002', 'nama_solusi' => 'bersihkan keyboard', 'deskripsi_solusi'=> 'keyboard ketik tidak semestinya '],
+            ['kode_solusi' => 'S003', 'nama_solusi' => 'tambah penyimpaan hardisk', 'deskripsi_solusi'=> 'booting lama sekali'],
+            ['kode_solusi' => 'S004', 'nama_solusi' => 'ganti colling system', 'deskripsi_solusi'=> 'kipas mengeluarkan suara keras'],
+            ['kode_solusi' => 'S005', 'nama_solusi' => 'cek kualitas baterai', 'deskripsi_solusi'=> 'daya tidak bisa terisi'],
          
         ];
 
         foreach ($data as  $value) {
             # code...
             solusi::insert([
+                'kode_solusi' => $value['kode_solusi'],
                 'nama_solusi' => $value['nama_solusi'],
-                'keterangan_solusi' => $value['deskripsi_solusi'],
+                'deskripsi_solusi' => $value['deskripsi_solusi'],
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);

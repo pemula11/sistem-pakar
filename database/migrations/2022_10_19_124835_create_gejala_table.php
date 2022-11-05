@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('gejala', function (Blueprint $table) {
             $table->id();
+            $table->string("kode_gejala", 10)->required();
             $table->string("nama_gejala", 50)->required();
             $table->text("deskripsi_gejala", 250);
 
