@@ -15,6 +15,12 @@ class KerusakanController extends Controller
     public function index()
     {
         //
+        $data = kerusakan::all();
+        return view('dashboard.kerusakan.index', [
+            'tittle' => 'Login',
+            'active' => 'login',
+            'kerusakanTable' => $data,
+        ]);
     }
 
     /**
@@ -36,6 +42,14 @@ class KerusakanController extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'kode_kerusakan' => 'required|max:50|unique:kerusakan',
+            'nama_kerusakan' => 'max:50|required',
+            'deskripsi_kerusakan' => 'max:250|required',
+           ]);
+           kerusakan::create($validatedData);
+           
+          return redirect('/dashboard/kerusakan')->with('success', 'New Category Has Been Added');
     }
 
     /**
@@ -55,9 +69,19 @@ class KerusakanController extends Controller
      * @param  \App\Models\kerusakan  $kerusakan
      * @return \Illuminate\Http\Response
      */
-    public function edit(kerusakan $kerusakan)
+    public function edit($id)
     {
         //
+        $kode = kerusakan::select()->where('kode_kerusakan', $id)->get();
+        
+        if ($kode->count() > 0) {
+            return view('dashboard.kerusakan.edit_kerusakan', [
+                'data_kerusakan' => $kode[0],
+            ]);
+        }
+        else{
+            return redirect('/dashboard/kerusakan')->with('error', 'error enconunter');
+        }
     }
 
     /**
@@ -70,6 +94,20 @@ class KerusakanController extends Controller
     public function update(Request $request, kerusakan $kerusakan)
     {
         //
+         //'kode_kerusakan' => 'required|max:50|unique:kerusakan',
+         $rules = [
+            
+            'nama_kerusakan' => 'max:50|required',
+            'deskripsi_kerusakan' => 'max:250|required',
+           ];
+        if ($request->kode_kerusakan != $kerusakan->kode_kerusakan) {
+            # code...
+            $rules['kode_kerusakan'] = 'required|max:50|unique:kerusakan';
+        }
+        $validatedData = $request->validate($rules);
+        kerusakan::where('id', $kerusakan->id)
+            ->update($validatedData);
+        return redirect('/dashboard/kerusakan')->with('success', 'kerusakan Has Been Updated');
     }
 
     /**
@@ -81,5 +119,8 @@ class KerusakanController extends Controller
     public function destroy(kerusakan $kerusakan)
     {
         //
+        kerusakan::destroy($kerusakan->id);
+
+        return redirect('/dashboard/kerusakan')->with('success', ' Post Has Been Deleted');
     }
 }

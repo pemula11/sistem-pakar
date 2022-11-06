@@ -14,9 +14,11 @@ class SolusiController extends Controller
      */
     public function index()
     {
+        $data = solusi::all();
         return view('dashboard.solusi.index', [
-            "title" => "Solusi",
-            "active" => "solusi"
+            'tittle' => 'Login',
+            'active' => 'login',
+            'solusiTable' => $data,
         ]);
     }
 
@@ -38,7 +40,14 @@ class SolusiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'kode_solusi' => 'required|max:50|unique:solusi',
+            'nama_solusi' => 'max:50|required',
+            'deskripsi_solusi' => 'max:250|required',
+           ]);
+           solusi::create($validatedData);
+           
+          return redirect('/dashboard/solusi')->with('success', 'New Category Has Been Added');
     }
 
     /**
@@ -58,9 +67,19 @@ class SolusiController extends Controller
      * @param  \App\Models\solusi  $solusi
      * @return \Illuminate\Http\Response
      */
-    public function edit(solusi $solusi)
+    public function edit($id)
     {
         //
+        $kode = solusi::select()->where('kode_solusi', $id)->get();
+        
+        if ($kode->count() > 0) {
+            return view('dashboard.solusi.edit_solusi', [
+                'data_solusi' => $kode[0],
+            ]);
+        }
+        else{
+            return redirect('/dashboard/solusi')->with('error', 'error enconunter');
+        }
     }
 
     /**
@@ -73,6 +92,20 @@ class SolusiController extends Controller
     public function update(Request $request, solusi $solusi)
     {
         //
+         //'kode_solusi' => 'required|max:50|unique:solusi',
+         $rules = [
+            
+            'nama_solusi' => 'max:50|required',
+            'deskripsi_solusi' => 'max:250|required',
+           ];
+        if ($request->kode_solusi != $solusi->kode_solusi) {
+            # code...
+            $rules['kode_solusi'] = 'required|max:50|unique:solusi';
+        }
+        $validatedData = $request->validate($rules);
+        solusi::where('id', $solusi->id)
+            ->update($validatedData);
+        return redirect('/dashboard/solusi')->with('success', 'solusi Has Been Updated');
     }
 
     /**
@@ -84,5 +117,8 @@ class SolusiController extends Controller
     public function destroy(solusi $solusi)
     {
         //
+        solusi::destroy($solusi->id);
+
+        return redirect('/dashboard/solusi')->with('success', ' Post Has Been Deleted');
     }
 }

@@ -9,5 +9,6 @@ class kerusakan extends Model
 {
     use HasFactory;
     protected $table = 'kerusakan';
+    protected $fillable = ['nama_kerusakan','kode_kerusakan', 'deskripsi_kerusakan'];
 
 }

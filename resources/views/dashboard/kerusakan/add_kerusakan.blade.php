@@ -5,19 +5,19 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Tambah Gejala</h5>
+          <h5 class="modal-title" id="staticBackdropLabel">Tambah kerusakan</h5>
           <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           
             <!-- form -->
-            <form action="/dashboard/gejala" method="post" enctype="multipart/form-data">
+            <form action="/dashboard/kerusakan" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3 row form-group">
-                    <label for="kode" class="col-sm-3 col-form-label">Kode Gejala</label>
+                    <label for="kode" class="col-sm-3 col-form-label">Kode kerusakan</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control @error('kode_gejala') is-invalid @enderror" id="kode_gejala" name="kode_gejala" value="{{old('kode_gejala')}}" required autofocus > 
-                        @error('kode_gejala')
+                        <input type="text" class="form-control @error('kode_kerusakan') is-invalid @enderror" id="kode_kerusakan" name="kode_kerusakan" value="{{old('kode_kerusakan')}}" required autofocus > 
+                        @error('kode_kerusakan')
                         <div id="validationServer03Feedback" class="invalid-feedback">
                            {{ $message }}.
                          </div>
@@ -26,10 +26,10 @@
                    
                 </div>
                 <div class="mb-3 row form-group">
-                    <label for="nama" class="col-sm-3 col-form-label">Nama Gejala</label>
+                    <label for="nama" class="col-sm-3 col-form-label">Nama kerusakan</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control @error('nama_gejala') is-invalid @enderror" id="nama_gejala" name="nama_gejala" value="{{old('nama_gejala')}}" required>
-                        @error('nama_gejala')
+                        <input type="text" class="form-control @error('nama_kerusakan') is-invalid @enderror" id="nama_kerusakan" name="nama_kerusakan" value="{{old('nama_kerusakan')}}" required>
+                        @error('nama_kerusakan')
                         <div id="validationServer03Feedback" class="invalid-feedback">
                            {{ $message }}.
                          </div>
@@ -37,10 +37,10 @@
                     </div>
                 </div>
                 <div class="mb-3 row form-group">
-                    <label for="nama" class="col-sm-3 col-form-label">deskripsi Gejala</label>
+                    <label for="nama" class="col-sm-3 col-form-label">deskripsi kerusakan</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control @error('deskripsi_gejala') is-invalid @enderror" id="deskripsi_gejala" name="deskripsi_gejala" value="{{old('deskripsi_gejala')}}" required>
-                        @error('deskripsi_gejala')
+                        <input type="text" class="form-control @error('deskripsi_kerusakan') is-invalid @enderror" id="deskripsi_kerusakan" name="deskripsi_kerusakan" value="{{old('deskripsi_kerusakan')}}" required>
+                        @error('deskripsi_kerusakan')
                         <div id="validationServer03Feedback" class="invalid-feedback">
                            {{ $message }}.
                          </div>
@@ -62,7 +62,7 @@
   </div>
 
   <script>
-        $("#kode_gejala").on({
+        $("#kode_kerusakan").on({
     keydown: function(e) {
     if (e.which === 32 || e.which == 222 || e.which == 221 || e.which == 219 || e.which == 220 || e.which == 187)
         return false;

@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.main')
-@section('title', 'solusi')
+@section('title', 'user')
 @section('content')
     
 
@@ -8,7 +8,7 @@
     <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Daftar solusi</a>
+                <a class="navbar-brand" href="#">Daftar user</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
@@ -29,7 +29,7 @@
 
    <div class="card">
        <div class="card-header text-white bg-black">
-           Data solusi
+           Data user
        </div>
       
        <div class="card-body">
@@ -37,24 +37,23 @@
                <thead>
                    <tr>
                        <th scope="col">No</th>
-                       <th scope="col">Kode solusi</th>
-                       <th scope="col">Nama solusi</th>
-                       <th scope="col">deskripsi solusi</th>
+                       <th scope="col">Nama </th>
+                       <th scope="col">Role</th>
                        <th scope="col">Aksi</th>
                    </tr>
                </thead>
                <tbody>
-                @foreach ($solusiTable as $data)
+                @foreach ($userTable as $data)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td> {{$data->kode_solusi}} </td>
-                        <td>{{$data->nama_solusi}}</td>
-                        <td>{{$data->deskripsi_solusi}}</td>
+                        <td> {{$data->name}} </td>
+                        <td>{{$data->role_id}}</td>
+
                         <td>
-                            <a href="/dashboard/solusi/{{ $data->kode_solusi}}/edit" class="badge bg-warning">
+                            <a href="/dashboard/user/{{ $data->id}}/edit" class="badge bg-warning">
                                 Edit
                             </a>
-                            <form action="/dashboard/solusi/{{ $data->id }}" class="d-inline" method="post">
+                            <form action="/dashboard/user/{{ $data->id }}" class="d-inline" method="post">
                                 @method('delete')
                                 @csrf
                                 <button class="badge bg-danger border-0" onclick="return confirm('yakin hapus data?')"> 
@@ -75,7 +74,7 @@
 </div>
 
 
-  @include('dashboard.solusi.add_solusi')
+  @include('dashboard.data_user.add_user')
 
  
     @if ($errors->all())

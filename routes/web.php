@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Data_UserController;
 use App\Http\Controllers\GejalaController;
+use App\Http\Controllers\KerusakanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -60,6 +62,8 @@ Route::get('/dashboard', function () {
 
 Route::resource('/dashboard/gejala', GejalaController::class);
 Route::resource('/dashboard/solusi', SolusiController::class);
+Route::resource('/dashboard/kerusakan', KerusakanController::class);
+Route::resource('/dashboard/users', Data_UserController::class);
 
 
 Route::get('/datauser', function () {

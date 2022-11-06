@@ -10,4 +10,5 @@ class solusi extends Model
 
     use HasFactory;
     protected $table = 'solusi';
+    protected $fillable = ['nama_solusi','kode_solusi', 'deskripsi_solusi'];
 }
