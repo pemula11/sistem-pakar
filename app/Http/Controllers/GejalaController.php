@@ -14,9 +14,13 @@ class GejalaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = gejala::all();
+        if($request){
+            $data = gejala::where('nama_gejala', 'like', '%'.$request->search. '%')->get();
+        }else{
+            $data = gejala::all();
+        }
         return view('dashboard.gejala.index', [
             'tittle' => 'Login',
             'active' => 'login',
