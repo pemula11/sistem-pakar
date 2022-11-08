@@ -17,10 +17,16 @@
                     Tambah Data
                   </button>
 
-                  <form class="d-flex">
-                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-success" type="submit">Search</button>
-                  </form>
+                  <div class="row">
+                      <div class="d-flex">
+                          <form action="/dashboard/solusi/index" method="GET">
+                            <div class="d-flex">
+                              <input type="search" class="form-control me-2" placeholder="Search" aria-label="Search" name="search">
+                              <button class="btn btn-outline-secondary" type="submit">Search</button>
+                            </div>
+                           </form>
+                      </div>
+                 </div>
 
                   
             </div>

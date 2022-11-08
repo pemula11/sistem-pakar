@@ -12,9 +12,13 @@ class SolusiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = solusi::all();
+        if($request){
+            $data = solusi::where('nama_solusi', 'like', '%'.$request->search. '%')->get();
+        }else{
+            $data = solusi::all();
+        }
         return view('dashboard.solusi.index', [
             'tittle' => 'Login',
             'active' => 'login',
