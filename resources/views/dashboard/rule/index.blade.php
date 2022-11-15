@@ -14,7 +14,7 @@
                   </button>
                   
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-                    Tambah Data
+                    Tambah Rule
                   </button>
 
                   <div class="row">
@@ -53,11 +53,23 @@
                 @foreach ($ruleTable as $data)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td> {{$data->kode_rule}} </td>
-                        <td>{{$data->nama_rule}}</td>
-                        <td>{{$data->deskripsi_rule}}</td>
+                        <td> <b>{{$data->kerusakan->kode_kerusakan}}</b> | {{$data->kerusakan->nama_kerusakan}} </td>
+                        <td> <b>{{$data->solusi->kode_solusi}}</b>| {{$data->solusi->nama_solusi}}</td>
                         <td>
-                            <a href="/dashboard/rule/{{ $data->kode_rule}}/edit" class="badge bg-warning">
+                          @if ($data->relasi_gejala)
+                            IF
+                                @foreach ($data->relasi_gejala as $item)
+                                -  <b> {{$item->kode_gejala}} </b> | {{$item->nama_gejala}}   <br> 
+
+                                 @endforeach
+                            @endif
+                        
+                        </td>
+                        <td>
+                            <a href="/dashboard/rule/{{ $data->id}}/tambah_gejala" class="badge bg-success">
+                                Tambah gejala
+                            </a>
+                            <a href="/dashboard/rule/{{ $data->id}}/edit" class="badge bg-warning">
                                 Edit
                             </a>
                             <form action="/dashboard/rule/{{ $data->id }}" class="d-inline" method="post">

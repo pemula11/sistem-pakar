@@ -66,6 +66,8 @@ Route::resource('/dashboard/solusi', SolusiController::class);
 Route::resource('/dashboard/kerusakan', KerusakanController::class);
 Route::resource('/dashboard/users', Data_UserController::class);
 Route::resource('/dashboard/rule', RuleController::class);
+Route::get('/dashboard/rule/{id}/tambah_gejala', [RuleController::class, 'tambah_gejala']);
+Route::post('/dashboard/rule/tambah_gejala', [RuleController::class, 'add_gejala_query']);
 
 
 Route::get('/datauser', function () {
