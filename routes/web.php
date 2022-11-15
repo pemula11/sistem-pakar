@@ -6,6 +6,7 @@ use App\Http\Controllers\KerusakanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RuleController;
 use App\Http\Controllers\SolusiController;
 
 /*
@@ -64,6 +65,7 @@ Route::resource('/dashboard/gejala', GejalaController::class);
 Route::resource('/dashboard/solusi', SolusiController::class);
 Route::resource('/dashboard/kerusakan', KerusakanController::class);
 Route::resource('/dashboard/users', Data_UserController::class);
+Route::resource('/dashboard/rule', RuleController::class);
 
 
 Route::get('/datauser', function () {

@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('rules', function (Blueprint $table) {
             $table->id();
-            $table->integer("id_gejala");
-            $table->integer("id_kerusakan");
-            $table->integer("bobot");
+            $table->unsignedBigInteger('kerusakan_id')->nullable();
+            $table->unsignedBigInteger('solusi_id')->nullable();
+            $table->foreign('kerusakan_id')->references('id')->on('kerusakan')->onDelete('set null');
+            $table->foreign('solusi_id')->references('id')->on('solusi')->onDelete('set null');
+            $table->float("bobot");
             $table->timestamps();
         });
     }
