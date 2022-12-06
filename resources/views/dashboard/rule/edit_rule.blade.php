@@ -1,26 +1,31 @@
-
+@extends('dashboard.layouts.main')
+@section('title', 'Edit Rule')
+@section('content')
+    
 
   <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Tambah rule</h5>
-          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
+  < 
+  <div class="card">
+      <div class="card-header text-white bg-primary">
+          Edit Data Rule
+      </div>
+      
+      <div class="card-body">
+        {{$data_rule}}
           
             <!-- form -->
-            <form action="/dashboard/rule" method="post" enctype="multipart/form-data">
+            <form action="/dashboard/rule/{{$data_rule->id}}" method="post" enctype="multipart/form-data">
+                @method('put')  
                 @csrf
-               
+             
                 <div class="mb-3 row form-group">
                   <label for="kerusakan-option" class="col-sm-3 col-form-label">Kerusakan</label>
                   <div class="col-sm-9">
                     <select class="form-control" id="kerusakan-option" name="kerusakan_id">
                       @foreach ($datakerusakan as $item)
                       {{$item}}
-                          <option value="{{ $item->id }}">{{ $item->kode_kerusakan }} | {{ $item->nama_kerusakan }} </option>
+                          <option value="{{ $item->id }}" @if ($data_rule->kerusakan_id == $item->id) selected="selected" @endif>
+                            {{ $item->kode_kerusakan }} | {{ $item->nama_kerusakan }} </option>
                       @endforeach
                     </select>
                   </div>
@@ -31,7 +36,9 @@
                   <select class="form-control" id="kerusakan-option" name="solusi_id">
                     @foreach ($datasolusi as $item)
                     {{$item}}
-                        <option value="{{ $item->id }}">{{ $item->kode_solusi }} | {{ $item->nama_solusi }} </option>
+                        <option value="{{ $item->id }}" 
+                            @if ($data_rule->solusi_id == $item->id) selected="selected" @endif>
+                            {{ $item->kode_solusi }} | {{ $item->nama_solusi }} </option>
                     @endforeach
                   </select>
                 </div>
@@ -40,10 +47,11 @@
              <div class="mb-3 row form-group">
               <label for="kerusakan-option" class="col-sm-3 col-form-label">Kategori</label>
               <div class="col-sm-9">
-                <select class="form-control" id="kerusakan-option" name="kategori_id">
+                <select class="form-control" id="kerusakan-option" name="kategori_id" >
                   @foreach ($datakategori as $item)
                   {{$item}}
-                      <option value="{{ $item->id }}">{{ $item->kategori }}  </option>
+                      <option value="{{ $item->id }}" @if ($data_rule->kategori_id == $item->id) selected="selected" @endif>
+                        {{ $item->kategori }}  </option>
                   @endforeach
                 </select>
               </div>
@@ -55,13 +63,7 @@
             </form>
             <!-- endform -->
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          
-        </div>
-      </div>
     </div>
-  </div>
 
   <script>
         $("#kode_rule").on({
@@ -79,4 +81,5 @@
     
   </script>
 
-  
+
+@endsection

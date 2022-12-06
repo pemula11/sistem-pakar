@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Data_UserController;
+use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\GejalaController;
 use App\Http\Controllers\KerusakanController;
 use Illuminate\Support\Facades\Route;
@@ -47,12 +48,11 @@ Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 Route::get('/register', [RegisterController::class, 'index']);
 
-Route::get('/user', function () {
-    return view('user.user', [
-        "tittle" => "Dashboard",
-        "active" => "dashboard"
-    ]);
-});
+
+Route::get('/user', [DiagnosaController::class, 'index']);
+Route::get('/user/diagnosa', [DiagnosaController::class, 'diagnosa']);
+Route::post('/user/diagnosa/{data}', [DiagnosaController::class, 'diagnosis']);
+Route::get('/user/diagnosa/hasil', [DiagnosaController::class, 'hasil']);
 
 Route::get('/dashboard', function () {
     return view('dashboard.index', [

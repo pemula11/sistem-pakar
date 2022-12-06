@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Kategori;
 use App\Models\solusi;
 use Illuminate\Database\Seeder;
 
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
             KerusakanTableSeeder::class,
             SolusiTableSeeder::class,
             user_rolesTableSeeder::class,
+            KategoriSeeder::class,
         ]);
     }
 }

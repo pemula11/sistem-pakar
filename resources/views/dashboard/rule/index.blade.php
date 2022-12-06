@@ -45,6 +45,7 @@
                        <th scope="col">No</th>
                        <th scope="col">Nama kerusakan</th>
                        <th scope="col">Nama solusi</th>
+                       <th scope="col">Kategori</th>
                        <th scope="col">Gejala</th>
                        <th scope="col">Aksi</th>
                    </tr>
@@ -55,24 +56,32 @@
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td> <b>{{$data->kerusakan->kode_kerusakan}}</b> | {{$data->kerusakan->nama_kerusakan}} </td>
                         <td> <b>{{$data->solusi->kode_solusi}}</b>| {{$data->solusi->nama_solusi}}</td>
+                        <td> <b>{{$data->kategori->kategori}}</td>
                         <td>
                           @if ($data->relasi_gejala)
-                            IF
-                                @foreach ($data->relasi_gejala as $item)
-                                -  <b> {{$item->kode_gejala}} </b> | {{$item->nama_gejala}}   <br> 
 
+                                @foreach ($data->relasi_gejala as $item)
+                                -  <b> {{$item->kode_gejala}} </b> | {{$item->nama_gejala}}   <form action="/dashboard/rule/relasi/{{$data->id }}&{{$item->kode_gejala }}" class="d-inline" method="get">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="badge bg-danger border-0" onclick="return confirm('yakin hapus data?')"> 
+                                        
+                                        X
+                                        
+                                    </button>   <br> 
+                                </form>
                                  @endforeach
                             @endif
                         
                         </td>
                         <td>
                             <a href="/dashboard/rule/{{ $data->id}}/tambah_gejala" class="badge bg-success">
-                                Tambah gejala
+                               +gejala
                             </a>
                             <a href="/dashboard/rule/{{ $data->id}}/edit" class="badge bg-warning">
                                 Edit
                             </a>
-                            <form action="/dashboard/rule/{{ $data->id }}" class="d-inline" method="post">
+                            <form action="/dashboard/rule/{{ $data->id }}" class="d-inline" method="post" id="hapus">
                                 @method('delete')
                                 @csrf
                                 <button class="badge bg-danger border-0" onclick="return confirm('yakin hapus data?')"> 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Rule;
 use App\Models\gejala;
+use App\Models\Kategori;
 use App\Models\solusi;
 use App\Models\kerusakan;
 use App\Models\RelasiRole;
@@ -19,10 +20,11 @@ class RuleController extends Controller
     public function index()
     {
         //
-        $data = Rule::with(['kerusakan', 'solusi', 'relasi_gejala'])->get();
+        $data = Rule::with(['kerusakan', 'solusi', 'relasi_gejala', 'kategori'])->get();
         $kerusakan = kerusakan::select('id', 'nama_kerusakan', 'kode_kerusakan')->get();
         $solusi = solusi::select('id', 'nama_solusi', 'kode_solusi')->get();
         $gejala = gejala::select('id', 'nama_gejala', 'kode_gejala')->get();
+        $kategori = Kategori::select('id','kategori')->get();
        
      //   dd($data);
         return view('dashboard.rule.index', [
@@ -32,6 +34,7 @@ class RuleController extends Controller
             'datakerusakan' => $kerusakan,
             'datasolusi' => $solusi,
             'datagejala' => $gejala,
+            'datakategori' => $kategori,
         ]);
     }
 
@@ -54,6 +57,13 @@ class RuleController extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'kerusakan_id' => 'required',
+            'solusi_id' => 'required',
+            'kategori_id' => 'required',
+        ]);
+        Rule::create($validatedData);
+        return redirect('/dashboard/rule')->with('success', 'New Rule Has Been Added');
     }
 
     /**
@@ -76,6 +86,24 @@ class RuleController extends Controller
     public function edit(Rule $rule)
     {
         //
+        $kode = Rule::select()->where('id', $rule->id)->get();
+        $kerusakan = kerusakan::select('id', 'nama_kerusakan', 'kode_kerusakan')->get();
+        $solusi = solusi::select('id', 'nama_solusi', 'kode_solusi')->get();
+        $gejala = gejala::select('id', 'nama_gejala', 'kode_gejala')->get();
+        $kategori = Kategori::select('id','kategori')->get();
+        
+        if ($kode->count() == 1) {
+            return view('dashboard.rule.edit_rule', [
+                'data_rule' => $kode->first(),
+                'datakerusakan' => $kerusakan,
+                'datasolusi' => $solusi,
+                'datagejala' => $gejala,
+                'datakategori' => $kategori,
+            ]);
+        }
+        else{
+            return redirect('/dashboard/rule')->with('error', 'error enconunter');
+        }
     }
 
     /**
@@ -88,6 +116,14 @@ class RuleController extends Controller
     public function update(Request $request, Rule $rule)
     {
         //
+        $validatedData = $request->validate([
+            'kerusakan_id' => 'required',
+            'solusi_id' => 'required',
+            'kategori_id' => 'required',
+        ]);
+        Rule::findOrFail($rule->id)->update($validatedData);
+        
+        return redirect('/dashboard/rule')->with('success', 'Rule Has Been Updated');
     }
 
     /**
@@ -99,6 +135,10 @@ class RuleController extends Controller
     public function destroy(Rule $rule)
     {
         //
+        
+        $data = Rule::findOrFail($rule->id);
+        Rule::destroy($data->id);
+        return redirect('/dashboard/rule')->with('success', 'Rule Has Been Deleted');
     }
 
 

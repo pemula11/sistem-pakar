@@ -98,16 +98,11 @@ class KerusakanController extends Controller
     {
         //
          //'kode_kerusakan' => 'required|max:50|unique:kerusakan',
-         $rules = [
-            
+         $validatedData = $request->validate([
+            'kode_kerusakan' => 'required|max:50|unique:kerusakan',
             'nama_kerusakan' => 'max:50|required',
             'deskripsi_kerusakan' => 'max:250|required',
-           ];
-        if ($request->kode_kerusakan != $kerusakan->kode_kerusakan) {
-            # code...
-            $rules['kode_kerusakan'] = 'required|max:50|unique:kerusakan';
-        }
-        $validatedData = $request->validate($rules);
+           ]);
         kerusakan::where('id', $kerusakan->id)
             ->update($validatedData);
         return redirect('/dashboard/kerusakan')->with('success', 'kerusakan Has Been Updated');

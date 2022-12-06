@@ -21,6 +21,13 @@
 
     <link rel="stylesheet" href="/vendors/animate/animate.css">
 
+    <style>
+        .form-horizontal{
+    display:block;
+    width:50%;
+    margin:0 auto;
+}
+    </style>
   </head>
   <body style="background-image: url(/imgs/laptop.jpg)">
 
@@ -28,42 +35,31 @@
     @include('partials.navbar2')
 
     <!-- Header -->
-    @yield('container')
+ 
 
-    <!--  About Section  -->
-      <div id="about" class="container-fluid wow fadeIn" id="about"data-wow-duration="1.5s">
-        <div class="row">
-          <div class="col-lg-6 has-img-bg"></div>
-            <div class="">
-              <div class="row justify-content-center">
-                <div class="col-sm-8 py-5 my-5">
-                  <h2 class="row justify-content-center mb-4">About Us</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, quisquam accusantium nostrum modi, nemo, officia veritatis ipsum facere maxime assumenda voluptatum enim! Labore maiores placeat impedit, vero sed est voluptas!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita alias dicta autem, maiores doloremque quo perferendis, ut obcaecati harum, <br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum necessitatibus iste,
-                  nulla recusandae porro minus nemo eaque cum repudiandae quidem voluptate magnam voluptatum? <br>Nobis, saepe sapiente omnis qui eligendi pariatur. quis voluptas. Assumenda facere adipisci quaerat. Illum doloremque quae omnis vitae.</p>
-                  <p><b>Lonsectetur adipisicing elit. Blanditiis aspernatur, ratione dolore vero asperiores explicabo.</b></p>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos ab itaque modi, reprehenderit fugit soluta, molestias optio repellat incidunt iure sed deserunt nemo magnam rem explicabo vitae. Cum, nostrum, quidem.</p>
-                </div>
-              </div>
-            </div>
-        </div>
-      </div>
-
+   
     <!-- book a table Section  -->
-    <form action="" method="GET">
-      @csrf
-    <div class="container-fluid has-bg-overlay text-center text-light has-height-lg middle-items" id="book-table">
-      <div class="">
-          <h2 class="section-title mb-5">Enter Your Laptop</h2>
-          <div class="row mb-5">
-              <div class="col-sm-8 col-md-12 col-xs-12 my-2">
-                  <input type="text" id="laptop" class="form-control form-control-lg custom-form-control" placeholder="type here">
-              </div>
-          </div>
-          <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Find The Solve</button>
+   <div class="text-center">
+    <div class="container-fluit has-bg-overlay text-center text-light has-height-lg middle-items" id="book-table">
+    <form action="/user/diagnosa/gejala" method="post" class="form-horizontal">
+        @csrf
+      
+        <div class="text-center">
+            <h2 class="section-title mb-5">masukan kategori kerusakan</h2>
          
-      </div>
-  </div>
-</form>
+            <select class="form-control row-5 form-control-lg mb-2" id="kerusakan-option" name="kategori">
+                @foreach ($datakategori as $item) 
+                <option value="{{$item->kategori}}">{{$item->kategori}} </option>
+                @endforeach
+          </select>
+            
+            <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Find The Solve</button>  
+       </div>
+      </form>
+    </div>
+   </div>
+    
+
 
   <!-- page footer  -->
   <div class="container-fluid bg-dark text-light has-height-md middle-items border-top text-center wow fadeIn">
