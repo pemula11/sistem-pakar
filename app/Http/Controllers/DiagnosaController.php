@@ -34,7 +34,7 @@ class DiagnosaController extends Controller
     }
     public function diagnosis(Request $request, $data)
     {
-        $arr = array();
+          $arr = array();
         $notpick = array();
         $idx = [
             'arr' => 0,
@@ -51,20 +51,20 @@ class DiagnosaController extends Controller
                 'data' => $getsesi['idxdata'],
                 'kategori' => ($request->kategori),
             ];
-    
+
             }
 
         # code...
-       
+
 
         // $kategori = Rule::with(['kategori', 'relasi_gejala'])->whereHas('kategori', function($q) use($data){
         //     $q->where('kategori', '=', $data);
         // })->whereHas('relasi_gejala', function($q) use($data){
-            
+
             // $q->whereNOT(function ($query) {
             //     $query->whereIn('gejala_id', [1,2]);
             // });
-            
+
         // });
 
          $dt =($request->kategori);
@@ -95,31 +95,31 @@ class DiagnosaController extends Controller
             });
         }
 
-        
+
         $back = $kategori;
         $query = $kategori;
         $kategori = $kategori->get();
         $total = $kategori->count();
-        
+
         if ($total > 1){
-           
+
             $totalarr = $kategori[$idx['arr']]->relasi_gejala->count();
             if ($totalarr <= $idx['data']){
                 $idx['data'] = 0;
                 $idx['arr'] += 1;
-                
+
             }
-           
+
             $pertanyaan =  ($kategori[$idx['arr']]->relasi_gejala->get($idx['data']));
-            
+
         }
         else if ($total==1){
-           
+
            $back = $back->with(['relasi_gejala' => function($q) use($arr){
                 $q->whereNotIn('gejala_id', $arr);
             }
         ])->get();  
-                
+
            $back = ($back->first()->relasi_gejala);
            $totalrelasi = $back->count();
            if ($totalrelasi > 0){
