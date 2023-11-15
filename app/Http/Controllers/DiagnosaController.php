@@ -38,7 +38,8 @@ class DiagnosaController extends Controller
         $notpick = array();
         $idx = [
             'arr' => 0,
-            'data' => 0
+            'data' => 0,
+            'kategori' => '.',
         ];
 
         if ($request->datasesi){
@@ -47,7 +48,8 @@ class DiagnosaController extends Controller
             $notpick = $getsesi['pilihtidak'];
             $idx = [
                 'arr' => $getsesi['idxarr'],
-                'data' => $getsesi['idxdata']
+                'data' => $getsesi['idxdata'],
+                'kategori' => ($request->kategori),
             ];
     
             }
@@ -65,7 +67,7 @@ class DiagnosaController extends Controller
             
         // });
 
-         $dt = ($request->kategori);
+         $dt =($request->kategori);
         if ($request->pilihan){
             if ($request->pilihan == "ya"){
                 $idx['data'] += 1;
@@ -95,6 +97,7 @@ class DiagnosaController extends Controller
 
         
         $back = $kategori;
+        $query = $kategori;
         $kategori = $kategori->get();
         $total = $kategori->count();
         
@@ -124,14 +127,21 @@ class DiagnosaController extends Controller
            }
            else{
             #data ditemukan
+                $query->with(['kerusakan', 'solusi', 'relasi_gejala'])->get();
                return view('dashboard.user.hasildiagnosa', [
                 "tittle" => "Hasil Diagnosa",
                 "active" => "dashboard",
+                'kesimpulan' => 1,
+                'dataHasil' => $query->first(),
                ]);
            }
         }
         else{
-            return dd("tidak ada relasi");
+            return view('dashboard.user.hasildiagnosa', [
+                "tittle" => "Hasil Diagnosa",
+                "active" => "dashboard",
+                'kesimpulan' => 0,
+               ]);
             
            
         }
@@ -145,16 +155,17 @@ class DiagnosaController extends Controller
         $datasesi = [
             'idxdata' => $idx['data'],
             'idxarr' => $idx['arr'],
-            
+            'kategori' => $request->kategori,
             'pilihya' => $arr,
             'pilihtidak' => $notpick
         ];
   
-      // dd($kategori->get());
+     
 
       return view('dashboard.user.listdiagnosa', [
         "tittle" => "Dashboard",
         "active" => "dashboard",
+        'kategori' => $request->kategori,
         'datatanya' => $pertanyaan,
         'datasesi' => $datasesi,
     ]);

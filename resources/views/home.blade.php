@@ -5,6 +5,8 @@
         <div class="overlay text-white text-center">
             <h2 class="display-2 font-weight-bold my-3">WELCOME TO BEJI CENTER</h2>
             <h3 class="display-4 mb-5">Solve Your Laptop Problems Here</h3>
+
+            <a href="/user/diagnosa" class="btn btn-lg btn-primary"> COBAIN KONSULTASI </a>
         </div>
     </header>
 @endsection

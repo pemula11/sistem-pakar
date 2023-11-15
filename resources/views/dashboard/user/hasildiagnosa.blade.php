@@ -36,14 +36,31 @@
 
     <!-- Header -->
  
-
+    
+        
    
     <!-- book a table Section  -->
    <div class="text-center">
     <div class="container-fluit has-bg-overlay text-center text-light has-height-lg middle-items" id="book-table">
-        <h2 class="section-title mb-5"> HASILNYA ADALAH </h2>
+        <h2 class="section-title mb-5"> HASILNYA ADALAH  </h2>
+        @if ($kesimpulan)
+        <h4>laptop anda mengalami kerusakan pada : {{$dataHasil->kerusakan->nama_kerusakan}}</h4>
+        <h4>Dengan Gejala</h4>
+            @if ($dataHasil->relasi_gejala)
+
+            @foreach ($dataHasil->relasi_gejala as $item)
+            <p>-   {{$item->nama_gejala}} </p>
+            @endforeach
+            @endif
+
+
+        <h4>Solusinya adalah : {{$dataHasil->solusi->nama_solusi}}</h4>
+        @else
+        Tidak ada hasil
+        @endif
     </div>
    </div>
+  
     
 
 

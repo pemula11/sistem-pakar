@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Rule;
 use App\Models\gejala;
-use App\Models\Kategori;
 use App\Models\solusi;
+use App\Models\Kategori;
 use App\Models\kerusakan;
 use App\Models\RelasiRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RuleController extends Controller
 {
@@ -171,8 +172,6 @@ class RuleController extends Controller
     {
         # code...
 
-        
-
         $validatedData = $request->validate([
             
             'rule_id' => 'max:10|required',
@@ -182,4 +181,21 @@ class RuleController extends Controller
            RelasiRole::create($validatedData);
            return redirect('/dashboard/rule')->with('success', 'New Category Has Been Added');
     }
+
+    public function delete_gejala_query(Request $request, $data)
+    {
+        # code...
+        $posisi    =strpos($data, '&');
+       // dd($posisi);
+
+        $koderelasi =  substr($data, 0, $posisi);
+     
+        $kodegejala = substr($data, $posisi+1);
+
+
+        //$del = RelasiRole::where('gejala_id', $kodegejala)->where('rule_id', $koderelasi)->first()->delete();
+        $dels =  DB::table('relasi_rules')->where('gejala_id', $kodegejala)->where('rule_id', $koderelasi)->delete();
+        return redirect('/dashboard/rule')->with('success', 'Delete Has Been delete');
+    }
+
 }

@@ -49,7 +49,7 @@
          
             <select class="form-control row-5 form-control-lg mb-2" id="kerusakan-option" name="kategori">
                 @foreach ($datakategori as $item) 
-                <option value="{{$item->kategori}}">{{$item->kategori}} </option>
+                  <option value="{{$item->kategori}}">{{$item->kategori}} </option>
                 @endforeach
           </select>
             

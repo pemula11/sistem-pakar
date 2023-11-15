@@ -41,7 +41,7 @@
     <!-- book a table Section  -->
    <div class="text-center">
     <div class="container-fluit has-bg-overlay text-center text-light has-height-lg middle-items" id="book-table">
-    <form action="" method="GET" class="form-horizontal">
+    <form action="" method="post" class="form-horizontal">
         @csrf
       
         <div class="text-center">
@@ -51,6 +51,7 @@
             <input type="radio" name="pilihan" value="ya" id="ya"> Ya
             <input type="radio" name="pilihan"  value="tidak" id="tidak"> tidak
             <br>
+            <input type="hidden" name="kategori" value="{{$kategori}}" id="">
             <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Find The Solve</button>  
           <br>
             <input type="hidden" name="datasesi" id="" value="{{json_encode($datasesi)}}">

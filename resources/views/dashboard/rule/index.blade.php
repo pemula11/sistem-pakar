@@ -61,8 +61,8 @@
                           @if ($data->relasi_gejala)
 
                                 @foreach ($data->relasi_gejala as $item)
-                                -  <b> {{$item->kode_gejala}} </b> | {{$item->nama_gejala}}   <form action="/dashboard/rule/relasi/{{$data->id }}&{{$item->kode_gejala }}" class="d-inline" method="get">
-                                    @method('delete')
+                                -  <b> {{$item->kode_gejala}} </b> | {{$item->nama_gejala}}   <form action="/dashboard/rule/relasi/{{$data->id }}&{{$item->id }}" class="d-inline" method="get">
+                                 
                                     @csrf
                                     <button class="badge bg-danger border-0" onclick="return confirm('yakin hapus data?')"> 
                                         
